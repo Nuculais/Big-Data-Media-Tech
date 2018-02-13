@@ -2,7 +2,8 @@ import sklearn as sk
 import numpy as np
 import pandas as pd
 import nltk
-#nltk.download('stopwords', 'word_tokenize')
+nltk.download('stopwords')
+
 from sklearn.feature_extraction import text
 from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import MultinomialNB
@@ -14,7 +15,8 @@ testData = pd.read_csv("lab_test.txt")
 
 
 #Vectorizing and removing stopwords
-vectorizer = text.TfidfVectorizer(use_idf=True, lowercase=True, strip_accents='ascii', stop_words='english')
+stopset=set(nltk.stopwords.words('english'))
+vectorizer = text.TfidfVectorizer(use_idf=True, lowercase=True, strip_accents='ascii', stop_words=stopset)
 vectorizedData = vectorizer.fit_transform(trainData.review)
 vectorizedData.shape
 
@@ -29,7 +31,7 @@ for d in trainData.score:
 
 
 #Train/test-split
-reviewTrain, reviewTest, labelTrain, labelTest = sk.model_selection.train_test_split(vectorizedData,labels, random_state=42, test_size=0.3)
+reviewTrain, reviewTest, labelTrain, labelTest = sk.model_selection.train_test_split(vectorizedData,labels, random_state=42, test_size=0.33)
 
 
 #Training the classifier and calculating its accuracy
