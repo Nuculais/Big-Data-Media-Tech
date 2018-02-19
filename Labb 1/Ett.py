@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 import nltk
 nltk.download('stopwords')
-
 from sklearn.feature_extraction import text
 from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import MultinomialNB
@@ -15,8 +14,8 @@ testData = pd.read_csv("lab_test.txt")
 
 
 #Vectorizing and removing stopwords
-stopset=set(nltk.stopwords.words('english'))
-vectorizer = text.TfidfVectorizer(use_idf=True, lowercase=True, strip_accents='ascii', stop_words=stopset)
+#stopset=set(nltk.stopwords.words('english'))
+vectorizer = text.TfidfVectorizer(use_idf=True, lowercase=True, strip_accents='ascii', stop_words='english')
 vectorizedData = vectorizer.fit_transform(trainData.review)
 vectorizedData.shape
 
